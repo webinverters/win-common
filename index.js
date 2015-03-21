@@ -10,7 +10,8 @@ module.exports = function construct(config) {
   config = config || {};
   config = _.defaults(config, {
     useGlobals: true,
-    useTestConfig: false
+    useTestConfig: false,
+    apiTestServer: null // if you want the api test framework setup with super test and authentication helpers, pass in your server module here.
   });
 
   m.logger = require('./src/log')(config);
@@ -23,6 +24,12 @@ module.exports = function construct(config) {
 
   if (config.useTestConfig) {
     require('./src/testing/default-test-config');
+
+    if (config.apiTestServer) {
+      var apiTestHelper = rrequire('server/test/api-test-helper')(require('supertest'), config.apiTestServer);
+      global.testAuthHelper = apiTestHelper.authenticate;
+      global.request = apiTestHelper.request;
+    }
   }
 
   return m;
