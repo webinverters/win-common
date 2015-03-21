@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/webinverters/lib-base",
   "devDependencies": {
+    "chai": "^1.x.x",
+    "chai-as-promised": "^4.1.1",
     "coveralls": "2.11.2",
     "gulp": "^3.8.11",
     "gulp-bump": "^0.3.0",
@@ -29,9 +31,7 @@
     "istanbul": "0.3.7",
     "mocha": "2.2.1",
     "mocha-lcov-reporter": "0.0.2",
-    "chai": "^1.x.x",
-    "chai-as-promised": "^4.1.1",
-    "sinon": "^1.12.2",
+    "sinon": "^1.14.1",
     "sinon-as-promised": "^2.0.3",
     "sinon-chai": "^2.6.0"
   },
