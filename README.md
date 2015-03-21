@@ -1,2 +1,2 @@
-[![Coverage Status](https://coveralls.io/repos/Mooser/quickstart/badge.svg?branch=master)](https://coveralls.io/r/Mooser/quickstart?branch=master)
-[![Build Status](https://travis-ci.org/Mooser/quickstart.svg?branch=master)](https://travis-ci.org/Mooser/quickstart)
+[![Coverage Status](https://coveralls.io/repos/webinverters/win-common/badge.svg)](https://coveralls.io/r/webinverters/win-common)
+[![Build Status](https://travis-ci.org/webinverters/win-common.svg?branch=v0.0.1)](https://travis-ci.org/webinverters/win-common)
