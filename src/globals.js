@@ -7,5 +7,7 @@
 global._ = require('lodash');
 global.p = require('bluebird');
 global.path = require('path');
-global.fs = require('fs-extra');
+global.fs = require('./kernel/file-storage')();
 global.assert = require('assert-plus');
+global.time = require('./utils/time');
+global.timer = require('performance-now');

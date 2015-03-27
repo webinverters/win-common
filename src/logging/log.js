@@ -4,6 +4,7 @@
 
 'use strict';
 var bunyan = require('bunyan');
+var _ = require('lodash');
 
 module.exports = function construct(config, logProvider) {
   var m = {};

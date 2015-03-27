@@ -18,4 +18,4 @@ viewCov:
 
 all: unit int
 
-.PHONY: unit int coverage viewCov
+.PHONY: unit int coverage viewCov all

@@ -25,7 +25,7 @@ chai.config.includeStack = true;
 
 global.expect = chai.expect;
 
-var mocks = require('./common-mocks')();
+var mocks = require('./mocks')();
 global.mocks = mocks;
 
 
