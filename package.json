@@ -1,5 +1,5 @@
 {
-  "name": "lib-base",
+  "name": "win-common",
   "version": "0.0.2",
   "description": "Essential libraries and helpers for Node projects.",
   "main": "index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:webinverters/lib-base.git"
+    "url": "git@github.com:webinverters/win-common.git"
   },
   "author": "Justin Mooser",
   "licenses": [
@@ -20,9 +20,9 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/webinverters/lib-base/issues"
+    "url": "https://github.com/webinverters/win-common/issues"
   },
-  "homepage": "https://github.com/webinverters/lib-base",
+  "homepage": "https://github.com/webinverters/win-common",
   "devDependencies": {
     "chai": "^1.x.x",
     "chai-as-promised": "^4.1.1",
