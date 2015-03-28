@@ -1,7 +1,7 @@
 {
   "name": "lib-base",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.2",
+  "description": "Essential libraries and helpers for Node projects.",
   "main": "index.js",
   "scripts": {
     "test": "make all",
@@ -13,7 +13,12 @@
     "url": "git@github.com:webinverters/lib-base.git"
   },
   "author": "Justin Mooser",
-  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/webinverters/win-common/blob/master/LICENSE"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/webinverters/lib-base/issues"
   },
