@@ -1,13 +1,15 @@
 /**
- * Created by justin on 2014-12-03.
+ * @module batcher
+ * @summary: Provides batcher.chunk to chunk a collection and do something with each chunk.
+ *
+ * @description:
+ *
+ * Author: justin
+ * Created On: 2015-03-27.
+ * @license Apache-2.0
  */
 
-var p = require('bluebird'),
-    _ = require('lodash')
-;
-
-
-function construct() {
+module.exports = (function construct() {
   var m = {};
 
   m.chunk = function(collection, chunkSize, func) {
@@ -44,6 +46,5 @@ function construct() {
     return details.deferred.promise;
   };
   return m;
-};
+})();
 
-module.exports = construct();
