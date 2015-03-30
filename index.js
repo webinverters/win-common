@@ -66,7 +66,8 @@ module.exports = function construct(config) {
     }
   }
 
-  m.batcher = require('./src/batcher')();
+
+  m.batcher = require('./src/utils/batcher')(config);
 
   return m;
 };
