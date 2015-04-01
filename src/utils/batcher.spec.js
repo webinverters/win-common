@@ -1,9 +1,4 @@
-/**
- * Created by justin on 2014-12-03.
- */
-
 var batcher = require('./batcher');
-
 
 function initArray(size) {
   return Array.apply(null, {length: size}).map(Number.call, Number);

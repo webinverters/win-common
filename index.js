@@ -43,7 +43,7 @@ module.exports = function construct(config) {
   /** Setup Logging
    *
    */
-  m.logger = require('./src/logging/log')(config);
+  m.logger = require('./src/logging/log')(config.logging);
 
   /** Add globals if configured.
    *
@@ -51,7 +51,19 @@ module.exports = function construct(config) {
   if (config.useGlobals) {
     require('./src/globals');
     _.extend(global, m.logger);
+    global.logger = m.logger;
   }
+
+  /**
+   * Add an error function that can be thrown
+   * @param code
+   * @param errDetails
+   * @returns {Error}
+   */
+  global.error = function(code, errDetails) {
+    m.logger.logError({errorCode: code, errorDetails: errDetails});
+    return new Error(code);
+  };
 
   /** Add test globals if configured
    *

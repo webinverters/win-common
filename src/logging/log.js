@@ -1,7 +1,13 @@
 /**
- * Created by justin on 2015-03-16.
+ * @module log
+ * @summary: Provides comprehensive logging facilities.
+ *
+ * @description:
+ *
+ * Author: justin
+ * Created On: 2015-03-27.
+ * @license Apache-2.0
  */
-
 'use strict';
 var bunyan = require('bunyan');
 var _ = require('lodash');
@@ -68,7 +74,11 @@ module.exports = function construct(config, logProvider) {
   var log = logProvider || bunyan.createLogger(bunyanConf);
 
   /**
-   * Often you may be using external log rotation utilities like logrotate on Linux or logadm on SmartOS/Illumos. In those cases, unless your are ensuring "copy and truncate" sematics (via copytruncate with logrotate or -c with logadm) then the fd for your 'file' stream will change. You can tell bunyan to reopen the file stream with code like this in your app:
+   * Often you may be using external log rotation utilities like logrotate on Linux
+   * or logadm on SmartOS/Illumos. In those cases, unless your are ensuring "copy and truncate"
+   * sematics (via copytruncate with logrotate or -c with logadm) then the fd for your
+   * 'file' stream will change. You can tell bunyan to reopen the file stream with code
+   * like this in your app:
    */
   process.on('SIGUSR2', function () {
     log.reopenFileStreams();
@@ -86,6 +96,9 @@ module.exports = function construct(config, logProvider) {
     log.warn.apply(log, arguments);
   };
 
+  /**
+   * Logs errors to errorFile (if specified).  By default this will be "errors.log".
+   */
   m.logError = function() {
     log.error.apply(log,arguments);
   };
