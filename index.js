@@ -9,11 +9,13 @@ module.exports = function construct(config) {
 
   config = config || {};
   config = _.defaults(config, {
+    projectRoot: null,
     useGlobals: true,
     useTestConfig: false,
     apiTestServer: null // if you want the api test framework setup with super test and authentication helpers, pass in your server module here.
   });
 
+  if (!config.projectRoot) throw error('WIN_COMMON', 'You must specify a projectRoot.  Try __dirname.');
   /** Define rrequire
    *
    */
@@ -37,7 +39,7 @@ module.exports = function construct(config) {
     global.rrequire.basePaths = [];
   }
 
-  global.rrequire.basePaths.push(__dirname);
+  global.rrequire.basePaths.push(config.projectRoot);
 
 
   /** Setup Logging
