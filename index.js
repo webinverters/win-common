@@ -12,7 +12,19 @@ module.exports = function construct(config) {
     projectRoot: null,
     useGlobals: true,
     useTestConfig: false,
-    apiTestServer: null // if you want the api test framework setup with super test and authentication helpers, pass in your server module here.
+    apiTestServer: null, // if you want the api test framework setup with super test and authentication helpers, pass in your server module here.
+    logging: {
+      name: 'AppLog',
+      errorFile: './errors.log',
+      logFile: './info.log',
+      debug: false,
+      slackLoggingEnabled: false,
+      slackConfig: {
+        webhook_url: "",
+        channel: "",
+        username: "bot"
+      }
+    }
   });
 
   /** Define rrequire

@@ -22,23 +22,17 @@ module.exports = function construct(config, logProvider) {
     logFile: './info.log',
     debug: true,
     slackLoggingEnabled: false,
-    slackConfig:{
-      webhook_url: "https://hooks.slack.com/services/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",
-      channel: "shopswithoutstops",
-      username: "sws-platform"
-    },
-    global: true
+    slackConfig: {
+      webhook_url: "",
+      channel: "",
+      username: "bot"
+    }
   });
 
   var bunyanConf = {
     src: config.debug,
     name: config.name,
-    streams: [
-      {
-        level: 'info',
-        stream: process.stdout            // log INFO and above to stdout
-      }
-    ],
+    streams: [],
     serializers: {
       err: bunyan.stdSerializers.err
     }
@@ -63,6 +57,23 @@ module.exports = function construct(config, logProvider) {
       path: config.logFile
     });
   }
+
+  if (config.debug) {
+    //bunyanConf.streams.push({
+    //  level: 'debug',
+    //  stream: process.stdout
+    //});
+    var PrettyStream = require('bunyan-prettystream');
+    var prettyStdOut = new PrettyStream();
+    prettyStdOut.pipe(process.stdout);
+    bunyanConf.streams.push(
+    {
+      level: 'debug',
+        type: 'raw',
+      stream: prettyStdOut
+    });
+  }
+
 
   if (config.slackLoggingEnabled) {
     var BunyanSlack = require('bunyan-slack');
