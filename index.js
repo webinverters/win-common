@@ -15,31 +15,31 @@ module.exports = function construct(config) {
     apiTestServer: null // if you want the api test framework setup with super test and authentication helpers, pass in your server module here.
   });
 
-  if (!config.projectRoot) throw error('WIN_COMMON', 'You must specify a projectRoot.  Try __dirname.');
   /** Define rrequire
    *
    */
-  if (!global.rrequire) {
-    global.rrequire = function(name) {
-      var m;
-      _.each(global.rrequire.basePaths, function(basedir) {
-        try {
-          m = require(path.join(basedir, name));
-          return false; // break out of loop if the require succeeded.
-        } catch(ex) {
-          // intentionally swallow since some of the paths are expected to fail.
+  if (config.projectRoot) {
+    if (!global.rrequire) {
+      global.rrequire = function(name) {
+        var m;
+        _.each(global.rrequire.basePaths, function(basedir) {
+          try {
+            m = require(path.join(basedir, name));
+            return false; // break out of loop if the require succeeded.
+          } catch(ex) {
+            // intentionally swallow since some of the paths are expected to fail.
+          }
+        });
+
+        if (m) return m;
+        else {
+          throw new Error('rrequire could not find module: ' + name);
         }
-      });
-
-      if (m) return m;
-      else {
-        throw new Error('rrequire could not find module: ' + name);
-      }
-    };
-    global.rrequire.basePaths = [];
+      };
+      global.rrequire.basePaths = [];
+    }
+    global.rrequire.basePaths.push(config.projectRoot);
   }
-
-  global.rrequire.basePaths.push(config.projectRoot);
 
 
   /** Setup Logging
