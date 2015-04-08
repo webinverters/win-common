@@ -10,7 +10,7 @@
  */
 
 "use strict";
-
+var uuid = require('node-uuid');
 module.exports = function construct(config) {
   var m = {};
   config = config || {};
