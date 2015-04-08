@@ -20,7 +20,7 @@ module.exports = function construct(config, logProvider) {
     name: 'AppLog',
     errorFile: './errors.log',
     logFile: './info.log',
-    debug: true,
+    debug: false,
     slackLoggingEnabled: false,
     slackConfig: {
       webhook_url: "",
@@ -69,9 +69,10 @@ module.exports = function construct(config, logProvider) {
     bunyanConf.streams.push(
     {
       level: 'debug',
-        type: 'raw',
+      type: 'raw',
       stream: prettyStdOut
     });
+    console.log('added prettystream');
   }
 
 
