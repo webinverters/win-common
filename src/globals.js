@@ -13,3 +13,4 @@ global.time = require('./utils/time');
 global.timer = require('performance-now');
 global.moment = require('moment-timezone');
 global.util = require('util');
+global.random = require('./utils/random')();
