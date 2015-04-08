@@ -53,47 +53,52 @@ module.exports = function construct(config) {
     global.rrequire.basePaths.push(config.projectRoot);
   }
 
-
-  /** Setup Logging
-   *
-   */
-  m.logger = require('./src/logging/log')(config.logging);
-
-  /** Add globals if configured.
-   *
-   */
-  if (config.useGlobals) {
-    require('./src/globals');
-    _.extend(global, m.logger);
-    global.logger = m.logger;
-  }
-
   /**
-   * Add an error function that can be thrown
-   * @param code
-   * @param errDetails
-   * @returns {Error}
+   * Global.error is being used as a guard to prevent reinitializing if
+   * win-common has already been initialized.
    */
-  global.error = function(code, errDetails) {
-    m.logger.logError({errorCode: code, errorDetails: errDetails});
-    return new Error(code);
-  };
+  if (!global.error) {
+    /** Setup Logging
+     *
+     */
+    m.logger = require('./src/logging/log')(config.logging);
 
-  /** Add test globals if configured
-   *
-   */
-  if (config.useTestGlobals) {
-    require('./src/testing/test-globals');
-
-    if (config.apiTestServer) {
-      var apiTestHelper = rrequire('server/test/api-test-helper')(require('supertest'), config.apiTestServer);
-      global.testAuthHelper = apiTestHelper.authenticate;
-      global.request = apiTestHelper.request;
+    /** Add globals if configured.
+     *
+     */
+    if (config.useGlobals) {
+      require('./src/globals');
+      _.extend(global, m.logger);
+      global.logger = m.logger;
     }
+
+    /**
+     * Add an error function that can be thrown
+     * @param code
+     * @param errDetails
+     * @returns {Error}
+     */
+    global.error = function(code, errDetails) {
+      m.logger.logError({errorCode: code, errorDetails: errDetails});
+      return new Error(code);
+    };
+
+    /** Add test globals if configured
+     *
+     */
+    if (config.useTestGlobals) {
+      require('./src/testing/test-globals');
+
+      if (config.apiTestServer) {
+        var apiTestHelper = rrequire('server/test/api-test-helper')(require('supertest'), config.apiTestServer);
+        global.testAuthHelper = apiTestHelper.authenticate;
+        global.request = apiTestHelper.request;
+      }
+    }
+
+
+    m.batcher = require('./src/utils/batcher');
   }
-
-
-  m.batcher = require('./src/utils/batcher');
 
   return m;
 };
