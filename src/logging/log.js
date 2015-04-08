@@ -72,7 +72,7 @@ module.exports = function construct(config, logProvider) {
       type: 'raw',
       stream: prettyStdOut
     });
-    console.log('added prettystream');
+    console.warn('Debug Logging Is Enabled.  This is OK if it is not production');
   }
 
 
