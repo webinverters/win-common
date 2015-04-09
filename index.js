@@ -83,21 +83,20 @@ module.exports = function construct(config) {
       return new Error(code);
     };
 
-    /** Add test globals if configured
-     *
-     */
-    if (config.useTestGlobals) {
-      require('./src/testing/test-globals');
-
-      if (config.apiTestServer) {
-        var apiTestHelper = rrequire('server/test/api-test-helper')(require('supertest'), config.apiTestServer);
-        global.testAuthHelper = apiTestHelper.authenticate;
-        global.request = apiTestHelper.request;
-      }
-    }
-
-
     m.batcher = require('./src/utils/batcher');
+  }
+
+  /** Add test globals if configured
+   *
+   */
+  if (config.useTestGlobals) {
+    require('./src/testing/test-globals');
+
+    if (config.apiTestServer) {
+      var apiTestHelper = rrequire('server/test/api-test-helper')(require('supertest'), config.apiTestServer);
+      global.testAuthHelper = apiTestHelper.authenticate;
+      global.request = apiTestHelper.request;
+    }
   }
 
   return m;
