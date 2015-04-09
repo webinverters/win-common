@@ -19,6 +19,8 @@ global.sinon = require("sinon");
 global.sinonChai = require("sinon-chai");
 global.sinonAsPromised = require('sinon-as-promised')(p);
 
+var chaiSubset = require('chai-subset');
+chai.use(chaiSubset);
 chai.use(chaiAsPromised);
 chai.use(sinonChai);
 chai.config.includeStack = true;
