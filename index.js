@@ -82,8 +82,6 @@ module.exports = function construct(config) {
       m.logger.logError({errorCode: code, errorDetails: errDetails});
       return new Error(code);
     };
-
-    m.batcher = require('./src/utils/batcher');
   }
 
   /** Add test globals if configured
@@ -98,6 +96,8 @@ module.exports = function construct(config) {
       global.request = apiTestHelper.request;
     }
   }
+
+  m.batcher = require('./src/utils/batcher');
 
   return m;
 };
