@@ -99,6 +99,9 @@ module.exports = function construct(config) {
 
   m.batcher = require('./src/utils/batcher');
 
+
+  global.wincommon = _.extend({}, m);
+
   return m;
 };
 
