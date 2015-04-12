@@ -58,14 +58,10 @@ module.exports = function construct(config, logProvider) {
     });
   }
 
+  var PrettyStream = require('bunyan-prettystream');
+  var prettyStdOut = new PrettyStream();
+  prettyStdOut.pipe(process.stdout);
   if (config.debug) {
-    //bunyanConf.streams.push({
-    //  level: 'debug',
-    //  stream: process.stdout
-    //});
-    var PrettyStream = require('bunyan-prettystream');
-    var prettyStdOut = new PrettyStream();
-    prettyStdOut.pipe(process.stdout);
     bunyanConf.streams.push(
     {
       level: 'debug',
@@ -73,6 +69,11 @@ module.exports = function construct(config, logProvider) {
       stream: prettyStdOut
     });
     console.warn('Debug Logging Is Enabled.  This is OK if it is not production');
+  } else {
+    bunyanConf.streams.push({
+      level: 'info',
+      stream: prettyStdOut           // log INFO and above to stdout
+    });
   }
 
 
