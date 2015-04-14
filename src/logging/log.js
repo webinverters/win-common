@@ -13,8 +13,6 @@ var bunyan = require('bunyan');
 var _ = require('lodash');
 
 module.exports = function construct(config, logProvider) {
-  var m = {};
-
   config = config || {};
   config = _.defaults(config, {
     name: 'AppLog',
@@ -97,18 +95,18 @@ module.exports = function construct(config, logProvider) {
     log.reopenFileStreams();
   });
 
-  m.log = log.info;
+  log.log = log.info;
 
-  m.debug = log.debug;
+  log.debug = log.debug;
 
-  m.logWarn = log.warn;
+  log.logWarn = log.warn;
 
   /**
    * Logs errors to errorFile (if specified).  By default this will be "errors.log".
    */
-  m.logError = log.error;
+  log.logError = log.error;
 
-  m.logFatal = log.fatal;
+  log.logFatal = log.fatal;
 
-  return m;
+  return log;
 };
