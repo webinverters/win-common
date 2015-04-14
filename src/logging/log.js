@@ -61,11 +61,11 @@ module.exports = function construct(config, logProvider) {
   prettyStdOut.pipe(process.stdout);
   if (config.debug) {
     bunyanConf.streams.push(
-    {
-      level: 'info',  // dont show debug level in console since it is going to the logFile by default anyways.
-      type: 'raw',
-      stream: prettyStdOut
-    });
+      {
+        level: 'info',  // dont show debug level in console since it is going to the logFile by default anyways.
+        type: 'raw',
+        stream: prettyStdOut
+      });
     console.warn('Debug Logging Is Enabled.  This is OK if it is not production');
   } else {
     bunyanConf.streams.push({
@@ -77,7 +77,7 @@ module.exports = function construct(config, logProvider) {
 
   if (config.slackLoggingEnabled) {
     var BunyanSlack = require('bunyan-slack');
-    bunyanConf.stream = new BunyanSlack(config.slackConfig, function(error){
+    bunyanConf.stream = new BunyanSlack(config.slackConfig, function (error) {
       console.log(error);
     });
   }
@@ -95,18 +95,34 @@ module.exports = function construct(config, logProvider) {
     log.reopenFileStreams();
   });
 
-  log.log = log.info;
+  m.log = function () {
+    log.info.apply(log, arguments);
+  };
 
-  log.debug = log.debug;
+  m.debug = function () {
+    log.debug.apply(log, arguments);
+  };
 
-  log.logWarn = log.warn;
+  m.logWarn = function () {
+    log.warn.apply(log, arguments);
+  };
 
   /**
    * Logs errors to errorFile (if specified).  By default this will be "errors.log".
    */
-  log.logError = log.error;
+  m.logError = function () {
+    arguments.push(new Error().stack.split('\n')[2]);
+    log.error.apply(log, arguments);
+  };
 
-  log.logFatal = log.fatal;
+  m.logFatal = function () {
+    log.fatal.apply(log, arguments);
+  };
 
-  return log;
+  return m;
 };
+
+
+return log;
+}
+;
