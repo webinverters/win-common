@@ -50,7 +50,7 @@ module.exports = function construct(config, logProvider) {
 
   if (config.logFile) {
     bunyanConf.streams.push({
-      level: 'info',
+      level: config.debug ? 'debug' : 'info',
       type: 'rotating-file',
       period: '1d',
       count: 7,
@@ -64,7 +64,7 @@ module.exports = function construct(config, logProvider) {
   if (config.debug) {
     bunyanConf.streams.push(
     {
-      level: 'debug',
+      level: 'info',  // dont show debug level in console since it is going to the logFile by default anyways.
       type: 'raw',
       stream: prettyStdOut
     });
@@ -97,28 +97,18 @@ module.exports = function construct(config, logProvider) {
     log.reopenFileStreams();
   });
 
-  m.log = function() {
-    log.info.apply(log,arguments);
-  };
+  m.log = log.info;
 
-  m.debug = function() {
-    log.debug.apply(log,arguments);
-  };
+  m.debug = log.debug;
 
-  m.logWarn = function() {
-    log.warn.apply(log, arguments);
-  };
+  m.logWarn = log.warn;
 
   /**
    * Logs errors to errorFile (if specified).  By default this will be "errors.log".
    */
-  m.logError = function() {
-    log.error.apply(log,arguments);
-  };
+  m.logError = log.error;
 
-  m.logFatal = function() {
-    log.fatal.apply(log,arguments);
-  };
+  m.logFatal = log.fatal;
 
   return m;
 };
