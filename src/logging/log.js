@@ -13,6 +13,7 @@ var bunyan = require('bunyan');
 var _ = require('lodash');
 
 module.exports = function construct(config, logProvider) {
+  var m = {};
   config = config || {};
   config = _.defaults(config, {
     name: 'AppLog',
@@ -111,8 +112,9 @@ module.exports = function construct(config, logProvider) {
    * Logs errors to errorFile (if specified).  By default this will be "errors.log".
    */
   m.logError = function () {
-    arguments.push(new Error().stack.split('\n')[2]);
-    log.error.apply(log, arguments);
+    var args = Array.prototype.slice.call(arguments);
+    args.push(new Error().stack.split('\n')[2]);
+    log.error.apply(log, args);
   };
 
   m.logFatal = function () {
@@ -121,8 +123,3 @@ module.exports = function construct(config, logProvider) {
 
   return m;
 };
-
-
-return log;
-}
-;
