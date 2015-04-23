@@ -1,6 +1,6 @@
 {
   "name": "win-common",
-  "version": "0.0.33",
+  "version": "0.0.34",
   "description": "Essential libraries and helpers for Node projects.",
   "main": "index.js",
   "scripts": {
