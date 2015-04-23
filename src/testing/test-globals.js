@@ -13,8 +13,7 @@
 global.chai = require("chai");
 var chaiAsPromised = require("chai-as-promised");
 
-global.p = require('bluebird');
-global._ = require('lodash');
+require('../globals');
 global.sinon = require("sinon");
 global.sinonChai = require("sinon-chai");
 global.sinonAsPromised = require('sinon-as-promised')(p);
