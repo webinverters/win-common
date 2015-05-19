@@ -57,7 +57,7 @@ module.exports = function construct(config) {
    * Global.error is being used as a guard to prevent reinitializing if
    * win-common has already been initialized.
    */
-  if (!global.error) {
+  if (!global.wincommon) {
     /** Setup Logging
      *
      */
@@ -123,7 +123,9 @@ module.exports = function construct(config) {
       return resolver.promise;
     };
 
-  global.wincommon = _.extend({}, m);
+  if (!global.wincommon) {
+    global.wincommon = _.extend({}, m);
+  }
 
   return m;
 };
