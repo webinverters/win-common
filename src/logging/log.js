@@ -17,8 +17,8 @@ module.exports = function construct(config, logProvider) {
   config = config || {};
   config = _.defaults(config, {
     name: 'AppLog',
-    errorFile: './errors.log',
-    logFile: './info.log',
+    errorFile: '',
+    logFile: '',
     debug: false,
     slackLoggingEnabled: false,
     slackConfig: {
@@ -63,7 +63,7 @@ module.exports = function construct(config, logProvider) {
   if (config.debug) {
     bunyanConf.streams.push(
       {
-        level: 'info',  // dont show debug level in console since it is going to the logFile by default anyways.
+        level: 'debug',
         type: 'raw',
         stream: prettyStdOut
       });
@@ -74,7 +74,6 @@ module.exports = function construct(config, logProvider) {
       stream: prettyStdOut           // log INFO and above to stdout
     });
   }
-
 
   if (config.slackLoggingEnabled) {
     var BunyanSlack = require('bunyan-slack');
