@@ -12,19 +12,7 @@ module.exports = function construct(config) {
     projectRoot: null,
     useGlobals: true,
     useTestConfig: false,
-    apiTestServer: null, // if you want the api test framework setup with super test and authentication helpers, pass in your server module here.
-    logging: {
-      name: 'AppLog',
-      errorFile: './errors.log',
-      logFile: './info.log',
-      debug: false,
-      slackLoggingEnabled: false,
-      slackConfig: {
-        webhook_url: "",
-        channel: "",
-        username: "bot"
-      }
-    }
+    apiTestServer: null // if you want the api test framework setup with super test and authentication helpers, pass in your server module here.
   });
 
   /** Define rrequire
@@ -58,18 +46,11 @@ module.exports = function construct(config) {
    * win-common has already been initialized.
    */
   if (!global.wincommon) {
-    /** Setup Logging
-     *
-     */
-    m.logger = require('./src/logging/log')(config.logging);
-
     /** Add globals if configured.
      *
      */
     if (config.useGlobals) {
       require('./src/globals');
-      _.extend(global, m.logger);
-      global.logger = m.logger;
     }
 
     /**
@@ -79,7 +60,7 @@ module.exports = function construct(config) {
      * @returns {Error}
      */
     global.error = function(code, errDetails) {
-      m.logger.logError({errorCode: code, errorDetails: errDetails});
+      console.error(code, errDetails);
       return new Error(code);
     };
   }
