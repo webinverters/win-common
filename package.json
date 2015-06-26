@@ -53,6 +53,14 @@
     "mv": "^2.0.3",
     "node-uuid": "^1.4.3",
     "performance-now": "^0.2.0",
-    "supertest": "^0.15.0"
+    "supertest": "^0.15.0",
+
+    "chai": "^1.x.x",
+    "chai-as-promised": "^4.1.1",
+    "mocha": "2.2.1",
+    "sinon": "^1.14.1",
+    "sinon-as-promised": "^2.0.3",
+    "sinon-chai": "^2.6.0",
+    "chai-subset": "^1.0.0"
   }
 }
