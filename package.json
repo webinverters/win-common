@@ -1,6 +1,6 @@
 {
   "name": "win-common",
-  "version": "0.0.37",
+  "version": "0.0.38",
   "description": "Essential libraries and helpers for Node projects.",
   "main": "index.js",
   "scripts": {
@@ -54,7 +54,6 @@
     "node-uuid": "^1.4.3",
     "performance-now": "^0.2.0",
     "supertest": "^0.15.0",
-
     "chai": "^1.x.x",
     "chai-as-promised": "^4.1.1",
     "mocha": "2.2.1",
