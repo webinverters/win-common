@@ -112,9 +112,10 @@ common.toUnixTimestamp = function(num) {
   return Math.floor(num/1000);
 };
 
-common.addDays = function(start, dayCount) {
-  return moment.unix(start).add(dayCount, 'day').unix();
-};
+common.addDays = function(start, dayCount, tz) {
+    tz = tz || defaultTimezone;
+  return moment.tz(start, tz).add(dayCount, 'day').unix()
+}
 
 common.generateIntervals = function(config) {
   var result = [];
