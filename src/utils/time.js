@@ -114,7 +114,7 @@ common.toUnixTimestamp = function(num) {
 
 common.addDays = function(start, dayCount, tz) {
     tz = tz || defaultTimezone;
-  return moment.tz(start, tz).add(dayCount, 'day').unix()
+  return moment.tz(start*1000, tz).add(dayCount, 'day').unix()
 }
 
 common.generateIntervals = function(config) {
